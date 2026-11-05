@@ -1,0 +1,77 @@
+﻿<Window x:Class="SmoCalc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Калькулятор СМО" Height="560" Width="780"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ЛЕВАЯ ЧАСТЬ: ввод данных -->
+        <StackPanel Grid.Column="0" Margin="0,0,12,0">
+
+            <TextBlock Text="Тип СМО:" FontWeight="Bold"/>
+            <ComboBox x:Name="cbType" SelectedIndex="0" Margin="0,2,0,8"
+                      SelectionChanged="cbType_SelectionChanged">
+                <ComboBoxItem Content="1. С отказами (Эрланг)"/>
+                <ComboBoxItem Content="2. С неограниченной очередью"/>
+                <ComboBoxItem Content="3. С ограниченной очередью"/>
+            </ComboBox>
+
+            <TextBlock Text="Число каналов n:"/>
+            <TextBox x:Name="tbN" Text="1" Margin="0,2,0,8"/>
+
+            <TextBlock Text="Интенсивность потока заявок λ:"/>
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,8">
+                <TextBox x:Name="tbLambda" Width="150"/>
+                <TextBlock Text="  заявок в  " VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbLambdaUnit" SelectedIndex="1" Width="60">
+                    <ComboBoxItem Content="мин"/>
+                    <ComboBoxItem Content="ч"/>
+                    <ComboBoxItem Content="сут"/>
+                </ComboBox>
+            </StackPanel>
+
+            <TextBlock Text="Поток обслуживания задан:"/>
+            <ComboBox x:Name="cbMode" SelectedIndex="1" Margin="0,2,0,8"
+                      SelectionChanged="cbMode_SelectionChanged">
+                <ComboBoxItem Content="интенсивностью μ"/>
+                <ComboBoxItem Content="средним временем обслуживания"/>
+            </ComboBox>
+
+            <TextBlock x:Name="lblService" Text="Среднее время обслуживания:"/>
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,8">
+                <TextBox x:Name="tbService" Width="150"/>
+                <TextBlock x:Name="lblServiceUnit" Text="  в единицах:  " VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbServiceUnit" SelectedIndex="0" Width="60">
+                    <ComboBoxItem Content="мин"/>
+                    <ComboBoxItem Content="ч"/>
+                    <ComboBoxItem Content="сут"/>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel x:Name="spQueue" Visibility="Collapsed" Margin="0,0,0,8">
+                <TextBlock Text="Макс. число мест в очереди m:"/>
+                <TextBox x:Name="tbM" Text="2" Margin="0,2,0,0"/>
+            </StackPanel>
+
+            <StackPanel x:Name="spK" Visibility="Collapsed" Margin="0,0,0,8">
+                <TextBlock Text="Вероятность, что в очереди не более k заявок, k ="/>
+                <TextBox x:Name="tbK" Text="2" Margin="0,2,0,0"/>
+            </StackPanel>
+
+            <Button x:Name="btnCalc" Content="Рассчитать" Height="32" Margin="0,10,0,4"
+                    IsDefault="True" Click="btnCalc_Click"/>
+            <Button x:Name="btnClear" Content="Очистить" Height="26" Click="btnClear_Click"/>
+        </StackPanel>
+
+        <!-- ПРАВАЯ ЧАСТЬ: результаты -->
+        <DockPanel Grid.Column="1">
+            <TextBlock DockPanel.Dock="Top" Text="Результаты:" FontWeight="Bold" Margin="0,0,0,2"/>
+            <TextBox x:Name="tbResult" IsReadOnly="True" FontFamily="Consolas" FontSize="13"
+                     TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        </DockPanel>
+    </Grid>
+</Window>
