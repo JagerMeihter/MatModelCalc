@@ -9,6 +9,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        
         <!-- ЛЕВАЯ ЧАСТЬ: ввод данных -->
         <StackPanel Grid.Column="0" Margin="0,0,12,0">
 
